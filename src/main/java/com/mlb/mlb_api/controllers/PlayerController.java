@@ -12,6 +12,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/player")
+@CrossOrigin(origins = "https://frozen-fortress-68176.herokuapp.com/api/player")
 public class PlayerController {
 
 

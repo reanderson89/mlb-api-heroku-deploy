@@ -2,6 +2,7 @@ package com.mlb.mlb_api.service;
 
 import com.mlb.mlb_api.controllers.dto.PlayerDTO;
 import com.mlb.mlb_api.repositories.PlayerRepository;
+import com.mlb.mlb_api.repositories.TeamRepository;
 import com.mlb.mlb_api.repositories.entities.Player;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -13,16 +14,18 @@ import java.util.Optional;
 public class PlayerServiceImpl implements PlayerService{
 
     private final PlayerRepository playerRepository;
+    private final TeamService teamService;
+    private final TeamRepository teamRepository;
 
-    public PlayerServiceImpl(PlayerRepository playerRepository) {
+    public PlayerServiceImpl(PlayerRepository playerRepository, TeamService teamService, TeamRepository teamRepository) {
         this.playerRepository = playerRepository;
+        this.teamService = teamService;
+        this.teamRepository = teamRepository;
     }
 
     @Override
     public Player save(PlayerDTO playerDTO) {
-//        converting a PlayerDTO to a Player entity
-        Player player = new Player(playerDTO);
-        return playerRepository.save(player);
+        return playerRepository.save(new Player(playerDTO));
     }
 
     @Override
@@ -31,17 +34,18 @@ public class PlayerServiceImpl implements PlayerService{
         Player playerFromDb = findById(playerId);
 
 //        update the players information
-        if(playerDTO.getName() == null){
-            playerFromDb.setName(playerFromDb.getName());
-        } else if(playerDTO.getName().isEmpty()) {
-            playerFromDb.setName(playerFromDb.getName());
-        } else {
+//        check for name
+        if(playerDTO.getName() != null && !playerDTO.getName().isEmpty()){
             playerFromDb.setName(playerDTO.getName());
         }
 
+//      check for position
+        if(playerDTO.getPosition() != null && !playerDTO.getPosition().isEmpty()){
+            playerFromDb.setPosition(playerDTO.getPosition());
+        }
+
         playerFromDb.setAge(playerDTO.getAge() != null ? playerDTO.getAge() : playerFromDb.getAge());
-        playerFromDb.setRating(playerDTO.getRating() != null ? playerDTO.getRating() : playerFromDb.getRating());
-        playerFromDb.setYearsOfExperience(playerDTO.getYearsOfExperience() != null ? playerDTO.getYearsOfExperience() : playerFromDb.getYearsOfExperience());
+        playerFromDb.setCost(playerDTO.getCost() != null ? playerDTO.getCost() : playerFromDb.getCost());
 //        save the player back to the DB
 //        return the player to the client
         return playerRepository.save(playerFromDb);

@@ -13,9 +13,10 @@ public class Player {
     private  Integer id;
     private String name;
     private Integer age;
-    @Column(name = "years_of_experience")
-    private Double yearsOfExperience;
-    private Double rating;
+    private Double cost;
+    private String position;
+    @Column(name = "current_team")
+    private String currentTeam;
 
 
     public Player() {
@@ -24,8 +25,8 @@ public class Player {
     public Player(PlayerDTO playerDTO) {
         this.name = playerDTO.getName();
         this.age = playerDTO.getAge();
-        this.yearsOfExperience = playerDTO.getYearsOfExperience();
-        this.rating = playerDTO.getRating();
+        this.cost = playerDTO.getCost();
+        this.position = playerDTO.getPosition();
     }
 
     public Integer getId() {
@@ -52,20 +53,28 @@ public class Player {
         this.age = age;
     }
 
-    public Double getYearsOfExperience() {
-        return yearsOfExperience;
+    public Double getCost() {
+        return cost;
     }
 
-    public void setYearsOfExperience(Double yearsOfExperience) {
-        this.yearsOfExperience = yearsOfExperience;
+    public void setCost(Double cost) {
+        this.cost = cost;
     }
 
-    public Double getRating() {
-        return rating;
+    public String getPosition() {
+        return position;
     }
 
-    public void setRating(Double rating) {
-        this.rating = rating;
+    public void setPosition(String position) {
+        this.position = position;
+    }
+
+    public String getCurrentTeam() {
+        return currentTeam;
+    }
+
+    public void setCurrentTeam(String currentTeam) {
+        this.currentTeam = currentTeam;
     }
 
     @Override
@@ -74,8 +83,8 @@ public class Player {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", age=" + age +
-                ", yearsOfExperience=" + yearsOfExperience +
-                ", rating=" + rating +
+                ", yearsOfExperience=" + cost +
+                ", rating=" + position +
                 '}';
     }
 }

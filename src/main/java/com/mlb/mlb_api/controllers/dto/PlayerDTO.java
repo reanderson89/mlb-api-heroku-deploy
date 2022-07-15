@@ -5,14 +5,15 @@ public class PlayerDTO {
 
     private String name;
     private Integer age;
-    private Double yearsOfExperience;
-    private Double rating;
+    private Double cost;
+    private String position;
 
-    public PlayerDTO(String name, Integer age, Double yearsOfExperience, Double rating) {
+
+    public PlayerDTO(String name, Integer age, Double cost, String position) {
         this.name = name;
         this.age = age;
-        this.yearsOfExperience = yearsOfExperience;
-        this.rating = rating;
+        this.cost = cost;
+        this.position = position;
     }
 
     public String getName() {
@@ -31,19 +32,20 @@ public class PlayerDTO {
         this.age = age;
     }
 
-    public Double getYearsOfExperience() {
-        return yearsOfExperience;
+    public Double getCost() {
+        return cost;
     }
 
-    public void setYearsOfExperience(Double yearsOfExperience) {
-        this.yearsOfExperience = yearsOfExperience;
+    public void setCost(Double cost) {
+        this.cost = cost;
     }
 
-    public Double getRating() {
-        return rating;
+    public String getPosition() {
+        return position;
     }
 
-    public void setRating(Double rating) {
-        this.rating = rating;
+    public void setPosition(String position) {
+        this.position = position;
     }
+
 }
